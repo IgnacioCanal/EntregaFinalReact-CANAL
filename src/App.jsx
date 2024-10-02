@@ -6,12 +6,16 @@ import ProductDetail from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar/Navbar";
-import ItemListContainer from "./components/ItemListContainer.jsx/ItemListContainer";
+import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
+import { CartProvider } from "./context/CartContext";
 function App() {
   return (
     <div>
       <Navbar/>
-      <ItemListContainer greeting={"Bienvenidos a mi Ferretería"}/>
+      <CartProvider>
+        <ItemListContainer greeting={"Bienvenidos a mi Ferretería"}/>
+      </CartProvider>
+      
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
