@@ -1,30 +1,21 @@
-import { useState, useEffect } from 'react';
+import useProducts from '../../hooks/UseProducts';
 import ItemList from './ItemList';
-import { getProducts } from './Productos';
-import "./itemlistcontainer.scss"
+import Loading from '../Loading/Loading';
+import hocFilterProducts from '../../hoc/hocFilterProducts';
 
-const ItemListContainer = ({greeting}) => {
-  const [products, setProducts] = useState([]);
+import "./itemlistcontainer.css";
 
-  useEffect(() => {
-    getProducts()
-      .then((data) => {
-        setProducts(data)
-      })
-      .catch((error) =>{
-        console.error(error)
-      })
-      .finally(() => {
-        console.log("Finalizo la Promesa")
-      })
-  }, [])
+const ItemListContainer = ({products}) => {
 
   return (
     <div className="itemlistcontainer">
-      <h2>{greeting}</h2>
       <ItemList products={products} />
     </div>
   );
 };
 
-export default ItemListContainer;
+const ItemListContainerWithHoc = hocFilterProducts(ItemListContainer)
+
+export default ItemListContainerWithHoc
+
+//export default ItemListContainer

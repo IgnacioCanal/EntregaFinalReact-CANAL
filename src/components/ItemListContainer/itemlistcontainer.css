@@ -1,0 +1,9 @@
+.item-list-container {
+  text-align: center;
+  padding: 50px;
+}
+.item-list-container .item{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+  }

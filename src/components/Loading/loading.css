@@ -1,0 +1,5 @@
+.loading-screen {
+  display: flex;
+  position: absolute;
+  padding: 50px;
+}

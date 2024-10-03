@@ -6,14 +6,14 @@ import ProductDetail from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar/Navbar";
-import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
+import ItemListContainerWithHoc from "./components/ItemListContainer/ItemListContainer";
 import { CartProvider } from "./context/CartContext";
 function App() {
   return (
     <div>
       <Navbar/>
       <CartProvider>
-        <ItemListContainer greeting={"Bienvenidos a mi Ferretería"}/>
+        <ItemListContainerWithHoc />
       </CartProvider>
       
       <Router>
