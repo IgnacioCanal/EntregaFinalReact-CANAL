@@ -15,7 +15,7 @@ const hocFilterProducts = (Component) => {
       let filterProducts = products.filter((products) =>
         products.nombre.toLowerCase().includes(query)
       );
-     
+
       if (typeOrder === "minor") {
         filterProducts = filterProducts.sort((prevProducts, nextProducts) => {
           return prevProducts.precio - nextProducts.precio;

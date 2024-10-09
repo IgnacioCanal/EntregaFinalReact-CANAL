@@ -4,3 +4,7 @@
 .navbar .cartwidget p {
   color: white;
 }
+.navbar-brand img{
+width: 400px;
+background-color: yellow;
+}
