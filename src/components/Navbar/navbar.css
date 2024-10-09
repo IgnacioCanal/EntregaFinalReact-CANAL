@@ -1,0 +1,6 @@
+.navbar .cartwidget {
+  display: flex;
+}
+.navbar .cartwidget p {
+  color: white;
+}

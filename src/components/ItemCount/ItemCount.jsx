@@ -1,5 +1,5 @@
 import { useState } from "react";
-import './itemcount.scss'
+import './itemcount.css'
 
 const ItemCount = ({stockDisponible, initial, onAgregar}) => {
   const [cantidad, setCantidad] = useState(initial || 1);

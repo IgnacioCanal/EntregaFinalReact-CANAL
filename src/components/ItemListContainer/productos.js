@@ -9,11 +9,11 @@ const products = [
   { id: 'N8I567', nombre: 'Atornillador', precio: 1800, stock: 9, imagen: '', categoria: 'Herramientas' },
   { id: 'Q9J678', nombre: 'Cinta Métrica', precio: 150, stock: 30, imagen: '', categoria: 'Herramientas' },
   { id: 'P0K789', nombre: 'Nivel Láser', precio: 500, stock: 10, imagen: '', categoria: 'Herramientas' },
-  { id: 'L1M890', nombre: 'Interruptores', precio: 120, stock: 50, imagen: '', categoria: 'Electricidad' },
+  { id: 'L1M890', nombre: 'Interruptores', precio: 120, stock: 50, imagen: '', categoria: 'Iluminacion' },
   { id: 'K2N901', nombre: 'Tomacorrientes', precio: 100, stock: 40, imagen: '', categoria: 'Electricidad' },
   { id: 'J3O012', nombre: 'Cable Eléctrico', precio: 50, stock: 100, imagen: '', categoria: 'Electricidad' },
-  { id: 'H4P123', nombre: 'Lámpara Fluorescente', precio: 180, stock: 30, imagen: '', categoria: 'Electricidad' },
-  { id: 'G5Q234', nombre: 'Caja de Fusibles', precio: 250, stock: 25, imagen: '', categoria: 'Electricidad' },
+  { id: 'H4P123', nombre: 'Lámpara Fluorescente', precio: 180, stock: 30, imagen: '', categoria: 'Iluminacion' },
+  { id: 'G5Q234', nombre: 'Caja de Fusibles', precio: 250, stock: 25, imagen: '', categoria: 'Iluminacion' },
   { id: 'F6R345', nombre: 'Clavos', precio: 80, stock: 80, imagen: '', categoria: 'Clavos y Tornillos' },
   { id: 'E7S456', nombre: 'Tornillos', precio: 120, stock: 100, imagen: '', categoria: 'Clavos y Tornillos' },
   { id: 'D8T567', nombre: 'Tuercas', precio: 90, stock: 90, imagen: '', categoria: 'Clavos y Tornillos' },
@@ -23,11 +23,20 @@ const products = [
 
 
 const getProducts= () => {
-  return new Promise((resolve, reject) =>{
+  return new Promise((resolve) =>{
     setTimeout( ()=>{
       resolve(products)
     }, 2000)
   })
 }
 
-export { getProducts }
+const getProduct = (idProduct) =>{
+  return new Promise((resolve)=>{
+    setTimeout(()=>{
+      const product = products.find((product)=> product.id === idProduct)
+      resolve(product)
+    }, 2000)
+  })
+}
+
+export { getProducts, getProduct }

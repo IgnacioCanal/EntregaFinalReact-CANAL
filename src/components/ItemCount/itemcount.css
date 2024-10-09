@@ -1,0 +1,21 @@
+.producto-card {
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 300px;
+  margin: 20px;
+  text-align: center;
+}
+.producto-card .botonera {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.producto-card .botonera button {
+  padding: 5px 10px;
+}
+.producto-card .botonera span {
+  width: 20px;
+  text-align: center;
+}

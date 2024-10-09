@@ -1,24 +1,25 @@
-import { createContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const CartContext = createContext();
 
-const CartProvider = ({ children }) => {
+const CartContextProvider = ({ children }) => {
   const [items, setItems] = useState([]);
 
-  const addToCart = (product, quantity) => {
-    const itemInCart = items.find(item => item.id === product.id);
+  const addToCart = (product, cantidad) => {
+    const itemInCart = items.find((item) => item.id === product.id);
     if (itemInCart) {
+      itemInCart.cantidad += cantidad;
       // Si el producto ya está en el carrito, sumamos la cantidad
       setItems(
         items.map(item => 
           item.id === product.id 
-          ? { ...item, quantity: item.quantity + quantity } 
+          ? { ...item, cantidad: item.cantidad + cantidad } 
           : item
         )
       );
     } else {
       // Si es la primera vez que se agrega el producto
-      setItems([...items, { ...product, quantity }]);
+      setItems([...items, { ...product, cantidad }]);
     }
   };
 
@@ -29,4 +30,4 @@ const CartProvider = ({ children }) => {
   );
 };
 
-export { CartContext, CartProvider };
+export { CartContext, CartContextProvider };
