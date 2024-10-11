@@ -1,6 +1,6 @@
 import CartWidget from "./CartWidget";
 import logo from "../../../public/img/logovictornillo.png";
-import { Link } from "react-router-dom";
+import { Link , NavLink } from "react-router-dom";
 import "./navbar.css";
 
 const Navbar = () => {
@@ -18,12 +18,12 @@ const Navbar = () => {
             <li className="nav-item"><Link className="nav-link" to="*">Contacto</Link></li>
             <li className="nav-item dropdown"><a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
               <ul className="dropdown-menu">
-                <li><Link className="dropdown-item" to="/categoria/herramientas">Herramientas</Link></li>
-                <li><Link className="dropdown-item" to="/categoria/iluminacion">Iluminación</Link></li>
-                <li><Link className="dropdown-item" to="/categoria/maquinas">Maquinas</Link></li>
-                <li><Link className="dropdown-item" to="/categoria/clavosytornillos">Clavos y Tornillos</Link></li>
-                <li><Link className="dropdown-item" to="/categoria/plomeria">Plomería</Link></li>
-                <li><Link className="dropdown-item" to="/categoria/bazar">Bazar</Link></li>
+                <li><NavLink className={({isActive})=> (isActive ? "active-link" : "" ) + " dropdown-item"} to="/categoria/herramientas">Herramientas</NavLink></li>
+                <li><NavLink className={({isActive})=> (isActive ? "active-link" : "" ) + " dropdown-item"} to="/categoria/iluminacion">Iluminación</NavLink></li>
+                <li><NavLink className={({isActive})=> (isActive ? "active-link" : "" ) + " dropdown-item"} to="/categoria/maquinas">Maquinas</NavLink></li>
+                <li><NavLink className={({isActive})=> (isActive ? "active-link" : "" ) + " dropdown-item"} to="/categoria/clavosytornillos">Clavos y Tornillos</NavLink></li>
+                <li><NavLink className={({isActive})=> (isActive ? "active-link" : "" ) + " dropdown-item"} to="/categoria/plomeria">Plomería</NavLink></li>
+                <li><NavLink className={({isActive})=> (isActive ? "active-link" : "" ) + " dropdown-item"} to="/categoria/bazar">Bazar</NavLink></li>
               </ul>
             </li>
           </ul>
