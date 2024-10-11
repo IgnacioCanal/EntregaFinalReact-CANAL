@@ -8,7 +8,6 @@ const CartContextProvider = ({ children }) => {
   const addToCart = (product, cantidad) => {
     const itemInCart = items.find((item) => item.id === product.id);
     if (itemInCart) {
-      itemInCart.cantidad += cantidad;
       // Si el producto ya está en el carrito, sumamos la cantidad
       setItems(
         items.map(item => 

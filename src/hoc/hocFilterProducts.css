@@ -1,11 +1,13 @@
 .filter-products{
   display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;
 }
 .filter-products .filters{
-  width: 30%;
+  width: 300px;
   height: 500px;
-  padding: 50px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -13,8 +15,16 @@
 }
 
 .filter-products .filters input {
-  width: 80%;
+  width: 100%;
   font-size: 20px;
   padding: 5px;
   border-radius: 10px;
+  background-color: yellow;
+  color:black;
+}
+
+.filter-products .filters button{
+  width: 80%;
+  height: 70px;
+  color: yellow;
 }

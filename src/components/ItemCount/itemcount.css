@@ -1,8 +1,6 @@
 .producto-card {
-  border: 1px solid #ccc;
-  padding: 20px;
-  width: 300px;
-  margin: 20px;
+  padding: 5px;
+  width: 100%;
   text-align: center;
 }
 .producto-card .botonera {
@@ -11,9 +9,11 @@
   justify-content: center;
   gap: 10px;
   margin-top: 10px;
+  width: 100%;
 }
 .producto-card .botonera button {
   padding: 5px 10px;
+  flex: 1;
 }
 .producto-card .botonera span {
   width: 20px;
