@@ -3,10 +3,12 @@ import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../../context/CartContext";
 import ItemCount from "../ItemCount/ItemCount";
 import Loading from "../Loading/Loading";
+import { useNavigate } from "react-router-dom";
 const ItemDetail = ({ product }) => {
   const [stockDisponible, setStockDisponible] = useState(product.stock);
   const { addToCart } = useContext(CartContext);
-
+  const navigate = useNavigate();
+  
   useEffect(()=>{
     if (product && product.stock){
       setStockDisponible(product.stock);
@@ -40,6 +42,7 @@ const ItemDetail = ({ product }) => {
         <p className="text-item">Stock disponible: {stockDisponible}</p>
         <p className="text-detail">Precio: ${product.precio}</p>
         <ItemCount stockDisponible={stockDisponible} initial={1} onAgregar={handleAgregar} />
+        <button onClick={() => navigate(-1)}>Volver</button>
       </div>
     </div>
   )

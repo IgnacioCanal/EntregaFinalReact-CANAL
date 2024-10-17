@@ -1,6 +1,6 @@
 import { useState } from "react";
 import './itemcount.css'
-
+import { Link } from "react-router-dom";
 const ItemCount = ({stockDisponible, initial, onAgregar}) => {
   const [cantidad, setCantidad] = useState(initial || 1);
 
@@ -16,6 +16,9 @@ const ItemCount = ({stockDisponible, initial, onAgregar}) => {
         <span>{cantidad}</span>
         <button onClick={incrementarCantidad} disabled={cantidad >= stockDisponible}>+</button>
         <button onClick={agregarAlCarrito} disabled= {stockDisponible === 0}>Agregar al carrito</button>
+        <Link to="/cart">
+        <button style={{ marginBottom: '10px' }}>Ir al Carrito</button>
+      </Link>
       </div>
     </div>
   );

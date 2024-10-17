@@ -3,11 +3,22 @@ import { getProduct } from "../ItemListContainer/Productos.js";
 import ItemDetail from "./ItemDetail.jsx";
 import { useParams } from "react-router-dom";
 import Loading from "../Loading/Loading.jsx";
+import { CartContext } from "../../context/CartContext.jsx";
+import { useContext } from "react";
 
 const ItemDetailContainer = () => {
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
   const { idProducto } = useParams();
+  const {addToCart} = useContext(CartContext);
+
+  const addProduct = (count) => {
+    const productCart = { ...product, cantidad: count}
+
+    addToCart(productCart)
+  }
+ 
+
   useEffect(() => {
     setLoading(true);
     getProduct(idProducto)
@@ -21,7 +32,7 @@ const ItemDetailContainer = () => {
     return <Loading />;
   }
 
-  return <ItemDetail product={product} />;
+  return (<ItemDetail product={product} addProduct ={addProduct}/>)
 };
 
 export default ItemDetailContainer;
