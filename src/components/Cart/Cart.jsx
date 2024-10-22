@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import { Link } from "react-router-dom";
+import "./cart.css";
 
 const Cart = () => {
   const {
@@ -16,14 +17,11 @@ const Cart = () => {
     <div>
       <h1>Productos en el carrito</h1>
       {cart.map((productCart) => (
-        <div
-          style={{ display: "flex", justifyContent: "space-around" }}
-          key={productCart.id}
-        >
-          <img src={productCart.imagen} width={100} alt="" />
-          <Link to={`/detalle/${productCart.id}`}>{productCart.nombre}</Link>
+        <div className="cartconteiner" key={productCart.id}>
+          <img src={productCart.imagen} alt="producto" />
+          <Link className="link" to={`/detalle/${productCart.id}`}>{productCart.nombre}</Link>
           <p>precio c/u: {productCart.precio}</p>
-          <div>
+          <div className="botonera">
             <button
               onClick={() => decreaseQuantity(productCart.id)}
               disabled={productCart.cantidad === 1}
@@ -39,9 +37,7 @@ const Cart = () => {
             </button>
           </div>
           <p>precio parcial: {productCart.precio * productCart.cantidad} </p>
-          <button
-            onClick={() => deleteProductInCart(productCart.id)}
-          >
+          <button onClick={() => deleteProductInCart(productCart.id)}>
             borrar producto
           </button>
         </div>

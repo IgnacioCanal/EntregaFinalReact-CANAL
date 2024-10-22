@@ -1,0 +1,48 @@
+.cartconteiner {
+  display: flex;
+  justify-content: space-around;
+  padding: 5px;
+  text-align: center;
+}
+
+.cartconteiner  img{
+  width: 100px;
+}
+
+.cartconteiner .link{
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: wheat;
+  padding: 5px;
+}
+
+.cartconteiner p{
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 5px;
+}
+
+.cartconteiner .botonera {
+  display: flex;
+  padding: 5px;
+  width: 150px;
+  height: 40px;
+  justify-content: center;
+
+}
+
+.cartconteiner .botonera button {
+  width: 50%;
+  
+
+}
+
+.cartconteiner .botonera p{
+  padding: 5px;
+}
+
+.cartconteiner button{
+  width: 100px;
+  height: 50px;
+}
