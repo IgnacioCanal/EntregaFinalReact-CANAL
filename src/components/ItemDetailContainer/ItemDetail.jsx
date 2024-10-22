@@ -4,7 +4,8 @@ import { CartContext } from "../../context/CartContext";
 import ItemCount from "../ItemCount/ItemCount";
 import Loading from "../Loading/Loading";
 import { useNavigate } from "react-router-dom";
-const ItemDetail = ({ product }) => {
+import { Link } from "react-router-dom";
+const ItemDetail = ({ product, addProduct, hideItemCount }) => {
   const [stockDisponible, setStockDisponible] = useState(product.stock);
   const { addToCart } = useContext(CartContext);
   const navigate = useNavigate();
@@ -41,7 +42,13 @@ const ItemDetail = ({ product }) => {
         <p className="text-detail">{product.descripcion}</p>
         <p className="text-item">Stock disponible: {stockDisponible}</p>
         <p className="text-detail">Precio: ${product.precio}</p>
-        <ItemCount stockDisponible={stockDisponible} initial={1} onAgregar={handleAgregar} />
+        {
+          hideItemCount === true ? (
+            <Link to={"/cart"}>Terminar mi compra</Link>
+          ) : (
+        <ItemCount stockDisponible={stockDisponible} initial={1} addProduct={addProduct} onAgregar={handleAgregar} />
+          )
+        }
         <button onClick={() => navigate(-1)}>Volver</button>
       </div>
     </div>

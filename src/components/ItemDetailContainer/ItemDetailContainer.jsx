@@ -11,11 +11,13 @@ const ItemDetailContainer = () => {
   const [loading, setLoading] = useState(true);
   const { idProducto } = useParams();
   const {addToCart} = useContext(CartContext);
+  const [hideItemCount, setHideItemCount] = useState(false)
 
   const addProduct = (count) => {
     const productCart = { ...product, cantidad: count}
 
     addToCart(productCart)
+    setHideItemCount(true)
   }
  
 
@@ -32,7 +34,7 @@ const ItemDetailContainer = () => {
     return <Loading />;
   }
 
-  return (<ItemDetail product={product} addProduct ={addProduct}/>)
+  return (<ItemDetail product={product} addProduct ={addProduct} hideItemCount ={hideItemCount}/>)
 };
 
 export default ItemDetailContainer;

@@ -15,7 +15,7 @@ const ItemCount = ({stockDisponible, initial, onAgregar}) => {
         <button onClick={disminuirCantidad} disabled={stockDisponible === 0}>-</button>
         <span>{cantidad}</span>
         <button onClick={incrementarCantidad} disabled={cantidad >= stockDisponible}>+</button>
-        <button onClick={agregarAlCarrito} disabled= {stockDisponible === 0}>Agregar al carrito</button>
+        <button onClick={() => addProduct(count), agregarAlCarrito} disabled= {stockDisponible === 0}>Agregar al carrito</button>
         <Link to="/cart">
         <button style={{ marginBottom: '10px' }}>Ir al Carrito</button>
       </Link>

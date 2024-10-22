@@ -13,6 +13,15 @@ const Cart = () => {
     decreaseQuantity,
   } = useContext(CartContext);
 
+  if( cart.length === 0){
+    return(
+      <div className="conteinervacio">
+        <h2>No hay productos en el carrtito 🥲</h2>
+        <Link className="linkvacio" to="/">Volver al Inicio</Link>
+      </div>
+    )
+  }
+
   return (
     <div>
       <h1>Productos en el carrito</h1>

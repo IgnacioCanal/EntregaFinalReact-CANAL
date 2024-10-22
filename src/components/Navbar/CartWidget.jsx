@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 const CartWidget = () => {
   const {totalProducts} = useContext(CartContext)
 
+  const total = totalProducts()
+
   return (
     <Link to="/cart" className="cartwidget">
       <GrCart className="carticon"/>
-      <p className="numero-cartwidget">{totalProducts()}</p>
+      <p className="numero-cartwidget">{total >= 1 && total}</p>
     </Link>
   )
 }
