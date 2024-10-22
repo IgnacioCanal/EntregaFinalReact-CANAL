@@ -5,9 +5,10 @@ import ItemCount from "../ItemCount/ItemCount";
 import Loading from "../Loading/Loading";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-const ItemDetail = ({ product, addProduct, hideItemCount }) => {
+const ItemDetail = ({ product }) => {
   const [stockDisponible, setStockDisponible] = useState(product.stock);
   const { addToCart } = useContext(CartContext);
+  const [hideItemCount, setHideItemCount] = useState(false)
   const navigate = useNavigate();
   
   useEffect(()=>{
@@ -20,6 +21,7 @@ const ItemDetail = ({ product, addProduct, hideItemCount }) => {
     if (cantidad <= stockDisponible) {
       addToCart(product, cantidad);
       setStockDisponible(stockDisponible - cantidad);
+      setHideItemCount(true);
     }
   };
   
@@ -46,7 +48,7 @@ const ItemDetail = ({ product, addProduct, hideItemCount }) => {
           hideItemCount === true ? (
             <Link to={"/cart"}>Terminar mi compra</Link>
           ) : (
-        <ItemCount stockDisponible={stockDisponible} initial={1} addProduct={addProduct} onAgregar={handleAgregar} />
+        <ItemCount stockDisponible={stockDisponible} initial={1} handleAgregar={handleAgregar} />
           )
         }
         <button onClick={() => navigate(-1)}>Volver</button>
