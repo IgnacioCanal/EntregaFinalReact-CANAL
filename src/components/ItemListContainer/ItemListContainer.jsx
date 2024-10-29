@@ -2,7 +2,6 @@ import ItemList from './ItemList';
 import Loading from '../Loading/Loading';
 import hocFilterProducts from '../../hoc/hocFilterProducts';
 import "./itemlistcontainer.css";
-import useProducts from '../../hooks/UseProducts';
 
 
 const ItemListContainer = ({products, loading}) => {
