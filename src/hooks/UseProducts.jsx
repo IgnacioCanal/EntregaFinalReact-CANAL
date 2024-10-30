@@ -10,11 +10,11 @@ const useProducts = () => {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const collectionRef = collection(db, "products");
+        const collectionRef = collection(db, "productos");
         let productsQuery;
 
         if (idCategoria) {
-          productsQuery = query(collectionRef, where("category", "==", idCategoria));
+          productsQuery = query(collectionRef, where("categoria", "==", idCategoria));
         } else {
           productsQuery = collectionRef;
         }

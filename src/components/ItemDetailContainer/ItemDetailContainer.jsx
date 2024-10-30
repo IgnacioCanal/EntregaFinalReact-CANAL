@@ -30,7 +30,7 @@ const ItemDetailContainer = () => {
 
   const getProduct = async () => {
     try {
-      const docRef = doc(db, "products", idProducto);
+      const docRef = doc(db, "productos", idProducto);
       const dataDb = await getDoc(docRef);
       const productDb = { id: dataDb.id, ...dataDb.data() };
       setProduct(productDb);
