@@ -13,8 +13,8 @@ function App() {
         <Router>
           <Navbar />
           <Routes>
-            <Route path="/" element={<ItemListContainerWithHoc />} />
-            <Route path="/categoria/:idCategoria" element={<ItemListContainerWithHoc/>}/>
+            <Route path="/" element={<ItemListContainer />} />
+            <Route path="/categoria/:idCategoria" element={<ItemListContainer/>}/>
             <Route path="/detalle/:idProducto" element={<ItemDetailContainer/>}/>
             <Route path="/cart" element={<Cart />} />
             <Route path="*" element={<NotFound />} />

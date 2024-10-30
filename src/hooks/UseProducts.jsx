@@ -1,33 +1,43 @@
 import { useState, useEffect } from "react";
-import { getProducts } from "../components/ItemListContainer/Productos.js";
 import { useParams } from "react-router-dom";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import db from "../db/db.js";
 const useProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { idCategoria } = useParams();
 
   useEffect(() => {
-    setLoading(true);
-    getProducts()
-    .then((data) => {
-  
-      if (idCategoria) {
-        const filterProducts = data.filter(
-          (product) => product.categoria === idCategoria
-        );
-        setProducts(filterProducts);
-      } else {
-        setProducts(data);
+    const getProducts = async () => {
+      try {
+        const collectionRef = collection(db, "products");
+        let productsQuery;
+
+        if (idCategoria) {
+          productsQuery = query(collectionRef, where("category", "==", idCategoria));
+        } else {
+          productsQuery = collectionRef;
+        }
+
+        const dataDb = await getDocs(productsQuery);
+        const productsDb = dataDb.docs.map((productDb) => ({
+          id: productDb.id,
+          ...productDb.data(),
+        }));
+
+        setProducts(productsDb);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
-    })
-    .catch((error) => {
-      console.error("Error fetching products:", error);
-      setLoading(false);
-    });
+    };
+
+    getProducts();
   }, [idCategoria]);
 
   return { products, loading };
 };
+
 
 export default useProducts;

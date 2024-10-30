@@ -1,9 +1,10 @@
 import useProducts from "../hooks/UseProducts";
 import { useState } from "react";
 import "./hocFilterProducts.css";
+import Loading from "../components/Loading/Loading";
 const hocFilterProducts = (Component) => {
-  return function () {
-    const { products, loading } = useProducts();
+  return ({idCategoria}) => {
+    const { products, loading } = useProducts(idCategoria);
     const [query, setQuery] = useState("");
     const [typeOrder, setTypeOrder] = useState("");
 
@@ -28,6 +29,10 @@ const hocFilterProducts = (Component) => {
       return filterProducts
     };
 
+    if (loading) {
+      return <div><Loading/></div>;
+    }
+
     return (
       <div className="filter-products">
         <div className="filters">
@@ -35,7 +40,7 @@ const hocFilterProducts = (Component) => {
           <button onClick={() => setTypeOrder("minor")}>Menor Precio</button>
           <button onClick={() => setTypeOrder("mayor")}>Mayor Precio</button>
         </div>
-        <Component products={search()} loading={loading}/>
+        <Component products={search()}/>
       </div>
     );
   };

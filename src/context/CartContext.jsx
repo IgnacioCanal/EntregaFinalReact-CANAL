@@ -8,7 +8,6 @@ const CartContextProvider = ({ children }) => {
   const addToCart = (product, cantidad) => {
     const ProductInCart = cart.find((cart) => cart.id === product.id);
     if (ProductInCart) {
-      // Si el producto ya está en el carrito, sumamos la cantidad
       setCart(
         cart.map(cart => 
           cart.id === product.id 
@@ -17,7 +16,6 @@ const CartContextProvider = ({ children }) => {
         )
       );
     } else {
-      // Si es la primera vez que se agrega el producto
       setCart([...cart, { ...product, cantidad }]);
     }
   }

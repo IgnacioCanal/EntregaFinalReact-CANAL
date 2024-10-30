@@ -1,39 +1,22 @@
-import "./itemdetail.css"
-import { useContext, useState, useEffect } from "react";
-import { CartContext } from "../../context/CartContext";
+import "./itemdetail.css";
+import { useState, useEffect } from "react";
 import ItemCount from "../ItemCount/ItemCount";
-import Loading from "../Loading/Loading";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-const ItemDetail = ({ product }) => {
+const ItemDetail = ({ product, addProduct, hideItemCount }) => {
   const [stockDisponible, setStockDisponible] = useState(product.stock);
-  const { addToCart } = useContext(CartContext);
-  const [hideItemCount, setHideItemCount] = useState(false)
   const navigate = useNavigate();
-  
-  useEffect(()=>{
-    if (product && product.stock){
+
+  useEffect(() => {
+    if (product && product.stock) {
       setStockDisponible(product.stock);
     }
-  },[product])
-
-  const handleAgregar = (cantidad) => {
-    if (cantidad <= stockDisponible) {
-      addToCart(product, cantidad);
-      setStockDisponible(stockDisponible - cantidad);
-      setHideItemCount(true);
-    }
-  };
-  
-  if (!product || Object.keys(product).length === 0) {
-    return <Loading />;
-  }
+  }, [product]);
 
   return (
     <div className="item-detail">
       <div className="images-detail-container">
-        <div className="secondary-images">
-        </div>
+        <div className="secondary-images"></div>
         <div className="main-image">
           <img src={product.imagen} alt="" />
         </div>
@@ -44,17 +27,19 @@ const ItemDetail = ({ product }) => {
         <p className="text-detail">{product.descripcion}</p>
         <p className="text-item">Stock disponible: {stockDisponible}</p>
         <p className="text-detail">Precio: ${product.precio}</p>
-        {
-          hideItemCount === true ? (
-            <Link to={"/cart"}>Terminar mi compra</Link>
-          ) : (
-        <ItemCount stockDisponible={stockDisponible} initial={1} handleAgregar={handleAgregar} />
-          )
-        }
+        {hideItemCount ? (
+          <Link to={"/cart"}>Terminar mi compra</Link>
+        ) : (
+          <ItemCount
+            stockDisponible={stockDisponible}
+            initial={1}
+            handleAgregar={addProduct}
+          />
+        )}
         <button onClick={() => navigate(-1)}>Volver</button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ItemDetail
+export default ItemDetail;
