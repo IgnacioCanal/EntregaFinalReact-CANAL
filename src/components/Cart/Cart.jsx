@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./cart.css";
 
 const Cart = () => {
@@ -11,6 +11,7 @@ const Cart = () => {
     deleteCart,
     increaseQuantity,
     decreaseQuantity,
+    isUpdating,
   } = useContext(CartContext);
 
   if( cart.length === 0){
@@ -30,17 +31,18 @@ const Cart = () => {
           <img src={productCart.imagen} alt="producto" />
           <Link className="link" to={`/detalle/${productCart.id}`}>{productCart.nombre}</Link>
           <p>precio c/u: {productCart.precio}</p>
+          <p>Stock Disponible: {productCart.stock}</p>
           <div className="botonera">
             <button
               onClick={() => decreaseQuantity(productCart.id)}
-              disabled={productCart.cantidad === 1}
+              disabled={productCart.cantidad === 1 || isUpdating}
             >
               -
             </button>
             <p>{productCart.cantidad}</p>
             <button
               onClick={() => increaseQuantity(productCart.id)}
-              disabled={productCart.cantidad >= productCart.stock}
+              disabled={productCart.stock == 0 || isUpdating}
             >
               +
             </button>

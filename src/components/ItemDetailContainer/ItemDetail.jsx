@@ -33,7 +33,7 @@ const ItemDetail = ({ product, addProduct, hideItemCount }) => {
           <ItemCount
             stockDisponible={stockDisponible}
             initial={1}
-            handleAgregar={addProduct}
+            addProduct={addProduct}
           />
         )}
         <button onClick={() => navigate(-1)}>Volver</button>

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import './itemcount.css'
 import { Link } from "react-router-dom";
-const ItemCount = ({stockDisponible, initial, handleAgregar}) => {
+const ItemCount = ({stockDisponible, initial, addProduct}) => {
   const [cantidad, setCantidad] = useState(initial || 1);
 
   // Funciones para manejar la cantidad
   const incrementarCantidad = () => cantidad < stockDisponible && setCantidad(cantidad + 1);
   const disminuirCantidad = () => cantidad > 1 && setCantidad(cantidad - 1);
-  const agregarAlCarrito = () =>{ if (cantidad > 0 && cantidad <= stockDisponible) {handleAgregar(cantidad);}};
+  const agregarAlCarrito = () =>{ if (cantidad > 0 && cantidad <= stockDisponible) {addProduct(cantidad);}};
 
   return (
     <div className="producto-card">

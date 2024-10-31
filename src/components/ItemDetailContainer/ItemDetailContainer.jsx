@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { CartContext } from "../../context/CartContext.jsx";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import db from "../../db/db.js";
 import ItemDetail from "./ItemDetail.jsx";
 import { useParams } from "react-router-dom";
@@ -12,20 +12,24 @@ const ItemDetailContainer = () => {
   const [hideItemCount, setHideItemCount] = useState(false);
   const { addToCart } = useContext(CartContext);
   const { idProducto } = useParams();
-  
-  const addProduct = (cantidad) => {
 
+  const addProduct = async (cantidad) => {
     if (cantidad <= product.stock) {
       const productCart = { ...product, cantidad: cantidad };
       addToCart(productCart, cantidad);
-      
-      setProduct(prevProduct => ({
+
+      setProduct((prevProduct) => ({
         ...prevProduct,
-        stock: prevProduct.stock - cantidad
+        stock: prevProduct.stock - cantidad,
       }));
 
+      const productRef = doc(db, "productos", product.id);
+      await updateDoc(productRef, {
+        stock: product.stock - cantidad,
+      });
+
       setHideItemCount(true);
-    } 
+    }
   };
 
   const getProduct = async () => {
@@ -40,7 +44,7 @@ const ItemDetailContainer = () => {
       setLoading(false);
     }
   };
-  
+
   useEffect(() => {
     getProduct();
   }, [idProducto]);
@@ -48,7 +52,13 @@ const ItemDetailContainer = () => {
     return <Loading />;
   }
 
-  return (<ItemDetail product={product} addProduct={addProduct} hideItemCount={hideItemCount} />)
+  return (
+    <ItemDetail
+      product={product}
+      addProduct={addProduct}
+      hideItemCount={hideItemCount}
+    />
+  );
 };
 
 export default ItemDetailContainer;
