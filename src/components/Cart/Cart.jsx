@@ -11,7 +11,6 @@ const Cart = () => {
     deleteCart,
     increaseQuantity,
     decreaseQuantity,
-    isUpdating,
   } = useContext(CartContext);
 
   if( cart.length === 0){
@@ -31,18 +30,18 @@ const Cart = () => {
           <img src={productCart.imagen} alt="producto" />
           <Link className="link" to={`/detalle/${productCart.id}`}>{productCart.nombre}</Link>
           <p>precio c/u: {productCart.precio}</p>
-          <p>Stock Disponible: {productCart.stock}</p>
+          <p>Stock Disponible: {productCart.stock - productCart.cantidad}</p>
           <div className="botonera">
             <button
               onClick={() => decreaseQuantity(productCart.id)}
-              disabled={productCart.cantidad === 1 || isUpdating}
+              disabled={productCart.cantidad === 1}
             >
               -
             </button>
             <p>{productCart.cantidad}</p>
             <button
               onClick={() => increaseQuantity(productCart.id)}
-              disabled={productCart.stock == 0 || isUpdating}
+              disabled={productCart.cantidad == productCart.stock}
             >
               +
             </button>

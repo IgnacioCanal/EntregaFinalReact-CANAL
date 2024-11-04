@@ -13,7 +13,7 @@ const FormCheckout = ({ dataForm, handleChangeInput, handleSubmitForm }) => {
       </div>
 
       <div className="content-input">
-        <label className="label">Redes:</label>
+        <label className="label">Redes Sociales:</label>
         <input type="number" name="redes" value={dataForm.phone} onChange={handleChangeInput} />
       </div>
 
@@ -23,7 +23,7 @@ const FormCheckout = ({ dataForm, handleChangeInput, handleSubmitForm }) => {
       </div>
 
       <div className="content-input">
-        <label className="label">Repetir Email</label>
+        <label className="label">Repetir Email:</label>
         <input type="email" name="repeatEmail" value={dataForm.repeatEmail} onChange={handleChangeInput} />
       </div>
       <button type="submit" className="button-send-order">Enviar orden de Compra</button>

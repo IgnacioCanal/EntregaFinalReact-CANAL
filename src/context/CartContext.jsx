@@ -1,6 +1,4 @@
-import { createContext, useState } from "react";
-import { doc, updateDoc } from "firebase/firestore";
-import db from "../db/db";
+import { createContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
 
@@ -9,14 +7,22 @@ const CartContextProvider = ({ children }) => {
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
-  const [isUpdating, setIsUpdating] = useState(false);
 
+  const [stockDisponible, setStockDisponible] = useState({});
+
+  useEffect(() => {
+    const initialStock = {};
+    cart.forEach((item) => {
+      initialStock[item.id] = item.stock - item.cantidad;
+    });
+    setStockDisponible(initialStock);
+  }, [cart]);
 
   const saveCartToLocalStorage = (cart) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   };
 
-  const addToCart = async (product, cantidad) => {
+  const addToCart = (product, cantidad) => {
     const ProductInCart = cart.find((cart) => cart.id === product.id);
     let newCart;
     
@@ -36,11 +42,13 @@ const CartContextProvider = ({ children }) => {
     if (newCart) {
       setCart(newCart);
       saveCartToLocalStorage(newCart);
-      await updateFirebaseStock(product.id, product.stock - cantidad);
+      const newStock = { ...stockDisponible };
+      newStock[product.id] = product.stock - newCart.find(item => item.id === product.id).cantidad;
+      setStockDisponible(newStock);
     }
   };
 
-  const deleteProductInCart = async (idProducto) => {
+  const deleteProductInCart = (idProducto) => {
     const productToDelete = cart.find(
       (productCart) => productCart.id === idProducto
     );
@@ -48,15 +56,6 @@ const CartContextProvider = ({ children }) => {
       const newCart = cart.filter((productCart) => productCart.id !== idProducto);
       setCart(newCart);
       saveCartToLocalStorage(newCart);
-
-      const productRef = doc(db, "productos", idProducto);
-      try {
-        await updateDoc(productRef, {
-          stock: productToDelete.stock + productToDelete.cantidad,
-        });
-      } catch (error) {
-        console.error("Error al devolver el stock en Firebase: ", error);
-      }
     }
   };
 
@@ -74,88 +73,41 @@ const CartContextProvider = ({ children }) => {
     );
     return precioTotal;
   };
-  const deleteCart = async () => {
+  const deleteCart = () => {
     try {
-      const updatedCart = [...cart];
       setCart([]);
       saveCartToLocalStorage([]);
 
-      await Promise.all(
-        updatedCart.map(async (productCart) => {
-          const productRef = doc(db, "productos", productCart.id);
-          await updateDoc(productRef, {
-            stock: productCart.stock + productCart.cantidad,
-          });
-        })
-      );
     } catch (error) {
       console.error(
-        "Error al devolver el stock de los productos en Firebase: ",
-        error
-      );
+        "Error al vaciar el carrito: ", error);
     }
   };
 
-  const updateFirebaseStock = async (productId, newStock) => {
-    const productRef = doc(db, "productos", productId);
-    await updateDoc(productRef, { stock: newStock });
-  
-    setCart((prevCart) =>
-      prevCart.map((product) =>
-        product.id === productId ? { ...product, stock: newStock } : product
-      )
-    );
-  };
-
-  const increaseQuantity = async (id) => {
-  setIsUpdating(true);
-
-  const updatedCart = cart.map((product) => {
-    if (product.id === id && product.stock > 0) {
-      const newCantidad = product.cantidad + 1;
-      const newStock = product.stock - 1;
-      return { ...product, cantidad: newCantidad, stock: newStock };
-    }
-    return product;
-  });
+  const increaseQuantity = (id) => {
+    const updatedCart = cart.map((product) => {
+      if (product.id === id && product.cantidad < product.stock) {
+        return { ...product, cantidad: product.cantidad + 1 };
+      }
+      return product;
+    });
 
   setCart(updatedCart);
   saveCartToLocalStorage(updatedCart);
 
-  try {
-    const product = updatedCart.find((prod) => prod.id === id);
-    await updateFirebaseStock(id, product.stock);
-  } catch (error) {
-    console.error("Error updating stock:", error);
-  } finally {
-    setIsUpdating(false); 
-  }
 };
 
-const decreaseQuantity = async (id) => {
-  setIsUpdating(true);
-
+const decreaseQuantity = (id) => {
   const updatedCart = cart.map((product) => {
     if (product.id === id && product.cantidad > 1) {
-      const newCantidad = product.cantidad - 1;
-      const newStock = product.stock + 1;
-      return { ...product, cantidad: newCantidad, stock: newStock };
+      return { ...product, cantidad: product.cantidad - 1 };
     }
     return product;
   });
 
   setCart(updatedCart);
   saveCartToLocalStorage(updatedCart);
-
-  try {
-    const product = updatedCart.find((prod) => prod.id === id);
-    await updateFirebaseStock(id, product.stock);
-  } catch (error) {
-    console.error("Error updating stock:", error);
-  } finally {
-    setIsUpdating(false);
-  }
-}
+};
 
   return (
     <CartContext.Provider
@@ -168,6 +120,7 @@ const decreaseQuantity = async (id) => {
         totalProducts,
         deleteProductInCart,
         deleteCart,
+        setStockDisponible,
       }}
     >
       {children}

@@ -51,10 +51,7 @@ const Checkout = () => {
   const updateStock = () => {
     cart.map(({ cantidad, id, ...productCart }) => {
       const productRef = doc(db, "productos", id);
-      setDoc(productRef, {
-        ...productCart,
-        stock: productCart.stock - cantidad,
-      });
+      setDoc(productRef, {...productCart, stock: productCart.stock - cantidad });
     });
 
     deleteCart();
