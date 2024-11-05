@@ -1,30 +1,33 @@
 const FormCheckout = ({ dataForm, handleChangeInput, handleSubmitForm }) => {
   return (
     <form onSubmit={handleSubmitForm} className="form-checkout" >
-      <h2>Complete sus datos para que se puedan comunicar con usted desde el local</h2>
+      <h3>Complete sus datos para que se puedan comunicar con usted desde el local</h3>
       <div className="content-input">
-        <label className="label">Nombre completo: </label>
-        <input type="text" name="nombrecompleto" value={dataForm.fullname} onChange={handleChangeInput} />
+        <label className="label">*Nombres: </label>
+        <input type="text" name="nombres" value={dataForm.nombres} onChange={handleChangeInput} />
       </div>
-
       <div className="content-input">
-        <label className="label">Telefono:</label>
-        <input type="number" name="telefono" value={dataForm.phone} onChange={handleChangeInput} />
+        <label className="label">*Apellidos: </label>
+        <input type="text" name="apellidos" value={dataForm.apellidos} onChange={handleChangeInput} />
+      </div>
+      <div className="content-input">
+        <label className="label">*Telefono:</label>
+        <input type="number" name="telefono" value={dataForm.telefono} onChange={handleChangeInput} />
       </div>
 
       <div className="content-input">
         <label className="label">Redes Sociales:</label>
-        <input type="number" name="redes" value={dataForm.phone} onChange={handleChangeInput} />
+        <input type="text" name="redes" value={dataForm.redes} onChange={handleChangeInput} />
       </div>
 
       <div className="content-input">
-        <label className="label">Email:</label>
+        <label className="label">*Email:</label>
         <input type="email" name="email" value={dataForm.email} onChange={handleChangeInput} />
       </div>
 
       <div className="content-input">
-        <label className="label">Repetir Email:</label>
-        <input type="email" name="repeatEmail" value={dataForm.repeatEmail} onChange={handleChangeInput} />
+        <label className="label">*Repetir Email:</label>
+        <input type="email" name="repetiremail" value={dataForm.repetiremail} onChange={handleChangeInput} />
       </div>
       <button type="submit" className="button-send-order">Enviar orden de Compra</button>
     </form>

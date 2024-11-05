@@ -9,10 +9,12 @@ import { toast } from "react-toastify";
 
 const Checkout = () => {
   const [dataForm, setDataForm] = useState({
-    nombrecompleto: "",
+    nombres: "",
+    apellidos: "",
     telefono: "",
     redes: "",
     email: "",
+    repetiremail: "",
   });
   const [orderId, setOrderId] = useState(null);
   const { cart, totalPrecio, deleteCart } = useContext(CartContext);
@@ -23,17 +25,34 @@ const Checkout = () => {
 
   const handleSubmitForm = (evento) => {
     evento.preventDefault();
+    
+    if (!isFormValid()) {
+      return;
+    }
+    
     const order = {
       Comprador: { ...dataForm },
       Productos: [...cart],
       Fecha: Timestamp.fromDate(new Date()),
       Total: totalPrecio(),
     };
-    if (dataForm.email === dataForm.repeatEmail) {
-      uploadOrder(order);
-    } else {
-      toast.error("Los emails deben de coincidir. 😠");
+    
+    uploadOrder(order);
+  };
+  
+  const isFormValid = () => {
+    const { nombres, apellidos, telefono, email, repetiremail } = dataForm;
+    if (!nombres || !apellidos || !telefono || !email || !repetiremail) {
+      toast.error("Por favor complete todos los campos obligatorios.");
+      return false;
     }
+    
+    if (email !== repetiremail) {
+      toast.error("Los emails deben coincidir.");
+      return false;
+    }
+    
+    return true;
   };
 
   const uploadOrder = (newOrder) => {
