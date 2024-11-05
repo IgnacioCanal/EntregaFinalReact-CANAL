@@ -25,7 +25,7 @@ const CartContextProvider = ({ children }) => {
   const addToCart = (product, cantidad) => {
     const ProductInCart = cart.find((cart) => cart.id === product.id);
     let newCart;
-    
+
     if (ProductInCart) {
       const newCantidad = ProductInCart.cantidad + cantidad;
 
@@ -43,7 +43,8 @@ const CartContextProvider = ({ children }) => {
       setCart(newCart);
       saveCartToLocalStorage(newCart);
       const newStock = { ...stockDisponible };
-      newStock[product.id] = product.stock - newCart.find(item => item.id === product.id).cantidad;
+      newStock[product.id] =
+        product.stock - newCart.find((item) => item.id === product.id).cantidad;
       setStockDisponible(newStock);
     }
   };
@@ -53,7 +54,9 @@ const CartContextProvider = ({ children }) => {
       (productCart) => productCart.id === idProducto
     );
     if (productToDelete) {
-      const newCart = cart.filter((productCart) => productCart.id !== idProducto);
+      const newCart = cart.filter(
+        (productCart) => productCart.id !== idProducto
+      );
       setCart(newCart);
       saveCartToLocalStorage(newCart);
     }
@@ -77,10 +80,8 @@ const CartContextProvider = ({ children }) => {
     try {
       setCart([]);
       saveCartToLocalStorage([]);
-
     } catch (error) {
-      console.error(
-        "Error al vaciar el carrito: ", error);
+      console.error("Error al vaciar el carrito: ", error);
     }
   };
 
@@ -92,22 +93,21 @@ const CartContextProvider = ({ children }) => {
       return product;
     });
 
-  setCart(updatedCart);
-  saveCartToLocalStorage(updatedCart);
+    setCart(updatedCart);
+    saveCartToLocalStorage(updatedCart);
+  };
 
-};
+  const decreaseQuantity = (id) => {
+    const updatedCart = cart.map((product) => {
+      if (product.id === id && product.cantidad > 1) {
+        return { ...product, cantidad: product.cantidad - 1 };
+      }
+      return product;
+    });
 
-const decreaseQuantity = (id) => {
-  const updatedCart = cart.map((product) => {
-    if (product.id === id && product.cantidad > 1) {
-      return { ...product, cantidad: product.cantidad - 1 };
-    }
-    return product;
-  });
-
-  setCart(updatedCart);
-  saveCartToLocalStorage(updatedCart);
-};
+    setCart(updatedCart);
+    saveCartToLocalStorage(updatedCart);
+  };
 
   return (
     <CartContext.Provider

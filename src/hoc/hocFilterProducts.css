@@ -1,30 +1,74 @@
-.filter-products{
+/* Contenedor principal de los filtros */
+.filter-products {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
+  padding: 1rem;
+  gap: 2rem;
 }
-.filter-products .filters{
-  width: 300px;
-  height: 500px;
-  padding: 5px;
+
+/* Contenedor de los controles de filtros */
+.filter-products .filters {
+  width: 100%;
+  max-width: 320px;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+  gap: 1rem;
+  background-color: #f8f9fa; /* Fondo claro */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilo para el input de búsqueda */
 .filter-products .filters input {
   width: 100%;
-  font-size: 20px;
-  padding: 5px;
-  border-radius: 10px;
-  background-color: yellow;
-  color:black;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.3s, background-color 0.3s;
 }
 
-.filter-products .filters button{
-  width: 80%;
-  height: 70px;
-  color: yellow;
+.filter-products .filters input:focus {
+  border-color: #007bff; /* Color de foco */
+  background-color: #f0f8ff;
+  outline: none;
+}
+
+/* Botones de orden */
+.filter-products .filters button {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.75rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.filter-products .filters button:hover {
+  background-color: #0056b3;
+}
+
+.filter-products .filters button:active {
+  background-color: #004080;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .filter-products {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .filter-products .filters {
+    width: 100%;
+  }
 }

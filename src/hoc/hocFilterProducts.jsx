@@ -3,19 +3,19 @@ import { useState } from "react";
 import "./hocFilterProducts.css";
 import Loading from "../components/Loading/Loading";
 const hocFilterProducts = (Component) => {
-  return ({idCategoria}) => {
+  return ({ idCategoria }) => {
     const { products, loading } = useProducts(idCategoria);
     const [query, setQuery] = useState("");
     const [typeOrder, setTypeOrder] = useState("");
 
     const changeInput = (event) => {
-      setQuery(event.target.value.toLowerCase())
+      setQuery(event.target.value.toLowerCase());
     };
 
     const search = () => {
       let filterProducts = products.filter((product) =>
         product.nombre.toLowerCase().includes(query)
-      )
+      );
 
       if (typeOrder === "minor") {
         filterProducts = filterProducts.sort((prevProduct, nextProduct) => {
@@ -24,13 +24,17 @@ const hocFilterProducts = (Component) => {
       } else if (typeOrder === "mayor") {
         filterProducts = filterProducts.sort((prevProduct, nextProduct) => {
           return nextProduct.precio - prevProduct.precio;
-        })
+        });
       }
-      return filterProducts
+      return filterProducts;
     };
 
     if (loading) {
-      return <div><Loading/></div>;
+      return (
+        <div>
+          <Loading />
+        </div>
+      );
     }
 
     return (
@@ -40,10 +44,10 @@ const hocFilterProducts = (Component) => {
           <button onClick={() => setTypeOrder("minor")}>Menor Precio</button>
           <button onClick={() => setTypeOrder("mayor")}>Mayor Precio</button>
         </div>
-        <Component products={search()}/>
+        <Component products={search()} />
       </div>
     );
   };
 };
 
-export default hocFilterProducts
+export default hocFilterProducts;

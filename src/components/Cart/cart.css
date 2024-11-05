@@ -1,48 +1,84 @@
 .cartconteiner {
   display: flex;
-  justify-content: space-around;
-  padding: 5px;
-  text-align: center;
+  flex-direction: column; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  padding: 15px;
+  margin: 10px 0; 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+  background-color: #fff; 
 }
 
-.cartconteiner  img{
-  width: 100px;
+.cartconteiner img {
+  width: 100px; 
+  border-radius: 4px; 
 }
 
-.cartconteiner .link{
+.cartconteiner .link {
   text-decoration: none;
   font-weight: bold;
   font-size: 1.5rem;
-  color: wheat;
-  padding: 5px;
+  color: #333; 
+  margin-top: 10px; 
 }
 
-.cartconteiner p{
-  font-weight: bold;
-  font-size: 1.5rem;
-  padding: 5px;
+.cartconteiner p {
+  font-weight: normal; 
+  font-size: 1.2rem; 
+  margin: 5px 0; 
 }
 
-.cartconteiner .botonera {
+.botonera {
   display: flex;
-  padding: 5px;
-  width: 150px;
-  height: 40px;
-  justify-content: center;
-
+  align-items: center; 
+  margin-top: 10px; 
 }
 
-.cartconteiner .botonera button {
-  width: 50%;
-  
-
+.botonera button {
+  width: 40px; 
+  height: 40px; 
+  border: none; 
+  border-radius: 4px; 
+  background-color: #007bff; 
+  color: white; 
+  cursor: pointer; 
+  transition: background-color 0.3s; 
 }
 
-.cartconteiner .botonera p{
-  padding: 5px;
+.botonera button:hover {
+  background-color: #0056b3; 
 }
 
-.cartconteiner button{
-  width: 100px;
-  height: 50px;
+.cartconteiner button {
+  background-color: #dc3545; 
+  color: white; 
+  border: none;
+  padding: 10px 20px; 
+  border-radius: 4px; 
+  cursor: pointer;
+  transition: background-color 0.3s; 
 }
+
+.cartconteiner button:hover {
+  background-color: #c82333; 
+}
+
+.checkout {
+  margin-top: 20px; 
+}
+
+.button-to-home {
+  text-decoration: none;
+  display: inline-block;
+  background-color: #007bff; 
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  transition: background-color 0.3s; 
+}
+
+.button-to-home:hover {
+  background-color: #0056b3; 
+}
+
+

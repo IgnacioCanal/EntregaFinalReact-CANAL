@@ -14,7 +14,10 @@ const useProducts = () => {
         let productsQuery;
 
         if (idCategoria) {
-          productsQuery = query(collectionRef, where("categoria", "==", idCategoria));
+          productsQuery = query(
+            collectionRef,
+            where("categoria", "==", idCategoria)
+          );
         } else {
           productsQuery = collectionRef;
         }
@@ -38,6 +41,5 @@ const useProducts = () => {
 
   return { products, loading };
 };
-
 
 export default useProducts;

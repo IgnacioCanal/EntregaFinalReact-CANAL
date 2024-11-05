@@ -16,19 +16,20 @@ const ItemDetailContainer = () => {
   const addProduct = (cantidad) => {
     if (cantidad <= product.stock) {
       const productCart = { ...product, cantidad: cantidad };
-  
+
       addToCart(productCart, cantidad);
-      
+
       setStockDisponible((prevStock) => {
-        const nuevoStock = prevStock[product.id] ? prevStock[product.id] - cantidad : product.stock - cantidad;
+        const nuevoStock = prevStock[product.id]
+          ? prevStock[product.id] - cantidad
+          : product.stock - cantidad;
         return { ...prevStock, [product.id]: nuevoStock };
       });
-
 
       setHideItemCount(true);
       setProduct((prevProduct) => ({
         ...prevProduct,
-        stock: prevProduct.stock
+        stock: prevProduct.stock,
       }));
     }
   };

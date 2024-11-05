@@ -2,16 +2,20 @@ import "./itemdetail.css";
 import { useState, useEffect } from "react";
 import ItemCount from "../ItemCount/ItemCount";
 import { useNavigate } from "react-router-dom";
-const ItemDetail = ({ product, addProduct, hideItemCount, handleShowItemCount }) => {
+const ItemDetail = ({
+  product,
+  addProduct,
+  hideItemCount,
+  handleShowItemCount,
+}) => {
   const [stockDisponible, setStockDisponible] = useState(product.stock);
   const navigate = useNavigate();
-
 
   useEffect(() => {
     const calculateAvailableStock = () => {
       const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
       const productInCart = savedCart.find((item) => item.id === product.id);
-      
+
       if (productInCart) {
         setStockDisponible(product.stock - productInCart.cantidad);
       } else {
@@ -40,7 +44,9 @@ const ItemDetail = ({ product, addProduct, hideItemCount, handleShowItemCount })
         <p className="text-detail">Precio: ${product.precio}</p>
         {hideItemCount ? (
           <div>
-            <button onClick={() => navigate("/cart")}>Terminar mi compra</button>
+            <button onClick={() => navigate("/cart")}>
+              Terminar mi compra
+            </button>
             <button onClick={handleShowItemCount}>Seguir comprando</button>
           </div>
         ) : (

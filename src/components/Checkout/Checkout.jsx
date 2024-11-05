@@ -25,33 +25,34 @@ const Checkout = () => {
 
   const handleSubmitForm = (evento) => {
     evento.preventDefault();
-    
+
     if (!isFormValid()) {
       return;
     }
-    
+
     const order = {
       Comprador: { ...dataForm },
       Productos: [...cart],
       Fecha: Timestamp.fromDate(new Date()),
       Total: totalPrecio(),
     };
-    
+
     uploadOrder(order);
   };
-  
+
   const isFormValid = () => {
     const { nombres, apellidos, telefono, email, repetiremail } = dataForm;
     if (!nombres || !apellidos || !telefono || !email || !repetiremail) {
-      toast.error("Por favor complete todos los campos obligatorios.");
+      toast.info("Por favor complete todos los campos obligatorios(*).");
       return false;
+      0;
     }
-    
+
     if (email !== repetiremail) {
-      toast.error("Los emails deben coincidir.");
+      toast.error("Los emails no coinciden.");
       return false;
     }
-    
+
     return true;
   };
 
@@ -62,7 +63,7 @@ const Checkout = () => {
         setOrderId(response.id);
       })
       .finally(() => {
-        toast.success("Gracias por su compra!!");
+        toast.success("¡Gracias por Elegirnos!");
         updateStock();
       });
   };
@@ -70,7 +71,10 @@ const Checkout = () => {
   const updateStock = () => {
     cart.map(({ cantidad, id, ...productCart }) => {
       const productRef = doc(db, "productos", id);
-      setDoc(productRef, {...productCart, stock: productCart.stock - cantidad });
+      setDoc(productRef, {
+        ...productCart,
+        stock: productCart.stock - cantidad,
+      });
     });
 
     deleteCart();

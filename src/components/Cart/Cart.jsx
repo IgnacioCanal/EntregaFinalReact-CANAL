@@ -13,13 +13,15 @@ const Cart = () => {
     decreaseQuantity,
   } = useContext(CartContext);
 
-  if( cart.length === 0){
-    return(
+  if (cart.length === 0) {
+    return (
       <div className="conteinervacio">
         <h2>No hay productos en el carrtito 🥲</h2>
-        <Link className="linkvacio" to="/">Volver al Inicio</Link>
+        <Link className="linkvacio" to="/">
+          Volver al Inicio
+        </Link>
       </div>
-    )
+    );
   }
 
   return (
@@ -28,7 +30,9 @@ const Cart = () => {
       {cart.map((productCart) => (
         <div className="cartconteiner" key={productCart.id}>
           <img src={productCart.imagen} alt="producto" />
-          <Link className="link" to={`/detalle/${productCart.id}`}>{productCart.nombre}</Link>
+          <Link className="link" to={`/detalle/${productCart.id}`}>
+            {productCart.nombre}
+          </Link>
           <p>precio c/u: {productCart.precio}</p>
           <p>Stock Disponible: {productCart.stock - productCart.cantidad}</p>
           <div className="botonera">
