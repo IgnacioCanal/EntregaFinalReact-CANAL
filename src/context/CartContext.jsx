@@ -109,6 +109,10 @@ const CartContextProvider = ({ children }) => {
     saveCartToLocalStorage(updatedCart);
   };
 
+  const formatCurrency = (value) => {
+    return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(value);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -121,6 +125,7 @@ const CartContextProvider = ({ children }) => {
         deleteProductInCart,
         deleteCart,
         setStockDisponible,
+        formatCurrency
       }}
     >
       {children}

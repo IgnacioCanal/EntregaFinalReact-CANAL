@@ -6,6 +6,7 @@ import { CartContext } from "../../context/CartContext";
 import { Timestamp, addDoc, collection, setDoc, doc } from "firebase/firestore";
 import db from "../../db/db.js";
 import { toast } from "react-toastify";
+import "./checkout.css";
 
 const Checkout = () => {
   const [dataForm, setDataForm] = useState({
@@ -49,7 +50,7 @@ const Checkout = () => {
     }
 
     if (email !== repetiremail) {
-      toast.error("Los emails no coinciden.");
+      toast.error("Los emails no coinciden.", {icon: "❌"});
       return false;
     }
 
@@ -63,7 +64,7 @@ const Checkout = () => {
         setOrderId(response.id);
       })
       .finally(() => {
-        toast.success("¡Gracias por Elegirnos!");
+        toast.success("¡Gracias por Elegirnos! Tu orden fue enviada correctamente.", {icon: "✅"});
         updateStock();
       });
   };
@@ -83,9 +84,9 @@ const Checkout = () => {
   return (
     <div className="checkout">
       {orderId ? (
-        <div>
-          <h2>Orden enviada correctamente 😁</h2>
-          <p>Guarde su número de seguimiento: {orderId}</p>
+        <div className="checkout-confirmation">
+          <h2>Orden enviada correctamente</h2>
+          <p>Número de seguimiento: <spam className="orderid">{orderId}</spam></p>
           <Link to="/" className="button-to-home">
             Volver al inicio
           </Link>

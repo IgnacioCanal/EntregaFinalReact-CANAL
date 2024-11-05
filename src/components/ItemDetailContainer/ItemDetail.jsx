@@ -1,5 +1,6 @@
 import "./itemdetail.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 import ItemCount from "../ItemCount/ItemCount";
 import { useNavigate } from "react-router-dom";
 const ItemDetail = ({
@@ -10,6 +11,7 @@ const ItemDetail = ({
 }) => {
   const [stockDisponible, setStockDisponible] = useState(product.stock);
   const navigate = useNavigate();
+  const { formatCurrency } = useContext(CartContext);
 
   useEffect(() => {
     const calculateAvailableStock = () => {
@@ -31,9 +33,8 @@ const ItemDetail = ({
   return (
     <div className="item-detail">
       <div className="images-detail-container">
-        <div className="secondary-images"></div>
         <div className="main-image">
-          <img src={product.imagen} alt="" />
+          <img src={product.imagen} alt="producto" />
         </div>
       </div>
 
@@ -41,10 +42,10 @@ const ItemDetail = ({
         <h2 className="title-detail">{product.nombre}</h2>
         <p className="text-detail">{product.descripcion}</p>
         <p className="text-item">Stock disponible: {stockDisponible}</p>
-        <p className="text-detail">Precio: ${product.precio}</p>
+        <p className="text-detail">Precio: ${formatCurrency(product.precio)}</p>
         {hideItemCount ? (
-          <div>
-            <button onClick={() => navigate("/cart")}>
+          <div className="botones-finales">
+            <button onClick={() => navigate("/cart")} className="terminar">
               Terminar mi compra
             </button>
             <button onClick={handleShowItemCount}>Seguir comprando</button>

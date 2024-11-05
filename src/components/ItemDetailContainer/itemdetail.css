@@ -1,79 +1,93 @@
-/* Contenedor principal */
 .item-detail {
   display: flex;
   flex-direction: row;
   align-items: center;
   max-width: 100%;
   margin: auto;
-  padding: 1rem;
+  padding: 2rem;
   gap: 2rem;
-  color: #333;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  color: white;
+  border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Imagen principal */
+.images-detail-container {
+  flex: 1;
+}
+
 .images-detail-container .main-image img {
-  width: 100%;
-  max-width: 400px;
-  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s;
 }
 
 .images-detail-container .main-image img:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
-/* Información de texto */
+.text-detail-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .title-detail {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: bold;
-  text-decoration: underline;
   color: white;
   text-align: center;
+  border-bottom: 2px solid whitesmoke;
+  padding-bottom: 0.5rem;
 }
 
-.text-detail {
-  font-size: 1.1rem;
-  color: whitesmoke;
+.text-detail,
+.text-item {
+  font-size: 1.2rem;
+  color: white;
   margin: 0.5rem 0;
 }
 
-.text-item {
-  font-weight: bold;
-  color: whitesmoke  ;
-  margin-bottom: 1rem;
-}
 
-/* Botones */
 .text-detail-container button {
-  background-color: #333;
-  color: #fff;
+  background-color: rgb(188, 188, 23)  ;
+  color: black;
   padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  margin: 0.5rem 0;
   transition: background-color 0.3s;
+  font-weight: bold;
 }
 
 .text-detail-container button:hover {
-  background-color: #555;
+  background-color: yellow;
 }
 
-/* Botones de navegación */
+
 .text-detail-container .nav-buttons button {
   margin-right: 0.5rem;
 }
 
-/* Responsividad */
+.botones-finales {
+  display: flex;
+  gap: 1rem;
+}
+
+.botones-finales .terminar{
+  background-color: #28a745;
+}
+.botones-finales .terminar:hover{
+  background-color: #34fa5f;
+}
+
 @media (max-width: 768px) {
   .item-detail {
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
+    padding: 1.5rem;
   }
 
   .images-detail-container,

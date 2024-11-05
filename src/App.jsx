@@ -9,6 +9,7 @@ import Cart from "./components/Cart/Cart";
 import Checkout from "./components/Checkout/Checkout";
 import "react-toastify/dist/ReactToastify.css";
 function App() {
+  
   return (
     <CartContextProvider>
       <div className="container-total">

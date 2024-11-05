@@ -1,25 +1,48 @@
-.navbar .container-fluid{
-  width: 100%;
+.navbar {
+  background-color: #343a40;
+}
+
+.navbar .navbar-brand img {
+  max-width: 150px;
+  background-color: yellow;
+}
+
+.navbar .nav-link {
+  color: white;
+  margin-right: 20px;
+}
+
+.navbar .nav-link:hover {
+  color: yellow;
+}
+
+.navbar .dropdown-menu {
+  background-color: #343a40;
+}
+
+.navbar .dropdown-menu .active-link {
+  background-color: yellow;
+  color: black;
 }
 
 .navbar .cartwidget {
   display: flex;
-}
-.navbar .cartwidget p {
+  align-items: center;
   color: white;
 }
-.navbar-brand img{
-width: 100%;
-height: auto;
-max-width: 400px;
-background-color: yellow;
+
+.carticon {
+  font-size: 24px;
 }
-.navbar .dropdown-menu .active-link {
-  background-color: yellow;
-  color: black;
-  border: 2 solid black;
+
+.numero-cartwidget {
+  margin-left: 5px;
+  color: yellow;
 }
-.navbar .dropdown-menu .active-link:hover{
-  color: white;
-  background-color: rgb(183, 183, 22);
+
+
+@media (max-width: 768px) {
+  .navbar .nav-link {
+    margin-right: 10px;
+  }
 }

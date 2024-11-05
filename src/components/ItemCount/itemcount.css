@@ -1,38 +1,51 @@
-/* Estilos para ItemCount */
 .producto-card {
-  padding: 1rem;
-  width: 100%;
-  max-width: 600px;
-  border-radius: 8px;
+  padding: 1.5rem;
+  width: 100%;;
+  margin: auto;
+  border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
 .producto-card .botonera {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .producto-card .botonera button {
-  background-color: #333;
-  color: white;
-  padding: 0.5rem 1rem;
+  background-color: rgb(188, 188, 23);
+  color: black;
+  padding: 0.6rem 1.2rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: bold;
   transition: background-color 0.3s;
-  flex: 1;
 }
 
 .producto-card .botonera button:hover {
-  background-color: #555;
+  background-color: yellow;
 }
 
 .producto-card .botonera span {
-  font-size: 1.2rem;
-  width: 40px;
-  text-align: center;
+  font-size: 2rem;
   font-weight: bold;
+  width: 50px;
+  text-align: center;
 }
+
+.producto-card .botonera a button {
+  background-color: #28a745;
+  color: black;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+}
+
+.producto-card .botonera a button:hover {
+  background-color: #34fa5f;
+}
+

@@ -11,6 +11,7 @@ const Cart = () => {
     deleteCart,
     increaseQuantity,
     decreaseQuantity,
+    formatCurrency,
   } = useContext(CartContext);
 
   if (cart.length === 0) {
@@ -33,34 +34,34 @@ const Cart = () => {
           <Link className="link" to={`/detalle/${productCart.id}`}>
             {productCart.nombre}
           </Link>
-          <p>precio c/u: {productCart.precio}</p>
-          <p>Stock Disponible: {productCart.stock - productCart.cantidad}</p>
+          <p className="cartdetalle">Precio C/U: {formatCurrency(productCart.precio)}</p>
+          <p className="cartdetalle">Stock Disponible: {productCart.stock - productCart.cantidad}</p>
           <div className="botonera">
-            <button
+            <button className="boton"
               onClick={() => decreaseQuantity(productCart.id)}
               disabled={productCart.cantidad === 1}
             >
               -
             </button>
-            <p>{productCart.cantidad}</p>
-            <button
+            <p className="cantidad">{productCart.cantidad}</p>
+            <button className="boton"
               onClick={() => increaseQuantity(productCart.id)}
               disabled={productCart.cantidad == productCart.stock}
             >
               +
             </button>
           </div>
-          <p>precio parcial: {productCart.precio * productCart.cantidad} </p>
-          <button onClick={() => deleteProductInCart(productCart.id)}>
-            borrar producto
+          <p className="cartdetalle">Precio parcial: {formatCurrency(productCart.precio * productCart.cantidad)} </p>
+          <button onClick={() => deleteProductInCart(productCart.id)} className="eliminar">
+            Borrar Producto
           </button>
         </div>
       ))}
 
-      <div>
-        <p>Precio total: {totalPrecio()}</p>
-        <Link to="/checkout">Terminar con la Orden de Compra</Link>
-        <button onClick={deleteCart}>Vaciar carrito</button>
+      <div className="cartfinal">
+        <p className="precio">Precio total: {formatCurrency(totalPrecio())}</p>
+        <Link to="/checkout" className="finalizar">Terminar con la Orden de Compra</Link>
+        <button onClick={deleteCart} className="vaciar">Vaciar carrito</button>
       </div>
     </div>
   );

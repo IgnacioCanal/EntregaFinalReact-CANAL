@@ -49,3 +49,35 @@
   background-color: yellow;
   color: black;
 }
+
+.no-products {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.no-products h2 {
+  font-size: 1.5rem;
+  color: red;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.link-vacio {
+  padding: 10px 20px;
+  font-weight: bold;
+  color: black;
+  background-color: rgb(157, 157, 30);
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s; 
+}
+
+.link-vacio:hover {
+  background-color: yellow;
+}
