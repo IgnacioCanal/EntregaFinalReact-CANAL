@@ -17,7 +17,7 @@ const Cart = () => {
   if (cart.length === 0) {
     return (
       <div className="conteinervacio">
-        <h2>No hay productos en el carrtito 🥲</h2>
+        <h2>No hay productos en el carrtito, elija lo que más necesite</h2>
         <Link className="linkvacio" to="/">
           Volver al Inicio
         </Link>
@@ -27,7 +27,6 @@ const Cart = () => {
 
   return (
     <div>
-      <h1>Productos en el carrito</h1>
       {cart.map((productCart) => (
         <div className="cartconteiner" key={productCart.id}>
           <img src={productCart.imagen} alt="producto" />

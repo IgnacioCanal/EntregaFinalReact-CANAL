@@ -42,7 +42,7 @@ const ItemDetail = ({
         <h2 className="title-detail">{product.nombre}</h2>
         <p className="text-detail">{product.descripcion}</p>
         <p className="text-item">Stock disponible: {stockDisponible}</p>
-        <p className="text-detail">Precio: ${formatCurrency(product.precio)}</p>
+        <p className="text-detail">Precio: {formatCurrency(product.precio)}</p>
         {hideItemCount ? (
           <div className="botones-finales">
             <button onClick={() => navigate("/cart")} className="terminar">
