@@ -3,15 +3,18 @@ import { CartContext } from "../../context/CartContext.jsx";
 import { doc, getDoc } from "firebase/firestore";
 import db from "../../db/db.js";
 import ItemDetail from "./ItemDetail.jsx";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Loading from "../Loading/Loading.jsx";
+import Notification from "../notification/Notification.jsx";
 
 const ItemDetailContainer = () => {
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
+  const [notification, setNotification] = useState(null);
   const [hideItemCount, setHideItemCount] = useState(false);
   const { addToCart, setStockDisponible } = useContext(CartContext);
   const { idProducto } = useParams();
+  const navigate = useNavigate();
 
   const addProduct = (cantidad) => {
     if (cantidad <= product.stock) {
@@ -31,7 +34,17 @@ const ItemDetailContainer = () => {
         ...prevProduct,
         stock: prevProduct.stock,
       }));
+      setNotification({ message: 'Producto añadido al carrito', type: 'success' });
+
+      setTimeout(() => setNotification(null), 3000);
+    } else {
+      setNotification({ message: 'Stock insuficiente', type: 'error' });
+      setTimeout(() => setNotification(null), 3000);
     }
+  };
+
+  const handleBackToHome = () => {
+    navigate('/');
   };
 
   const handleShowItemCount = () => {
@@ -42,8 +55,13 @@ const ItemDetailContainer = () => {
     try {
       const docRef = doc(db, "productos", idProducto);
       const dataDb = await getDoc(docRef);
-      const productDb = { id: dataDb.id, ...dataDb.data() };
-      setProduct(productDb);
+
+      if (dataDb.exists()) {
+        const productDb = { id: dataDb.id, ...dataDb.data() };
+        setProduct(productDb);
+      } else {
+        setProduct(null);
+      }
     } catch (error) {
       console.error("Error fetching product: ", error);
     } finally {
@@ -57,14 +75,22 @@ const ItemDetailContainer = () => {
   if (loading) {
     return <Loading />;
   }
-
+  if (product === null) {
+    return <div>
+    <p className="productnull">Producto no encontrado</p>
+    <button onClick={handleBackToHome} className="botonnull">Volver al inicio</button>
+  </div>;
+  }
   return (
-    <ItemDetail
-      product={product}
-      addProduct={addProduct}
-      hideItemCount={hideItemCount}
-      handleShowItemCount={handleShowItemCount}
-    />
+    <div>
+      {notification && <Notification message={notification.message} type={notification.type} show={true} />}
+      <ItemDetail
+        product={product}
+        addProduct={addProduct}
+        hideItemCount={hideItemCount}
+        handleShowItemCount={handleShowItemCount}
+      />
+    </div>
   );
 };
 

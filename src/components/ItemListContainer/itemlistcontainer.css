@@ -11,22 +11,24 @@
 }
 .itemlistcontainer .itemlist{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 .itemlistcontainer .item{
-  width: 300px;
-  margin: 3% 6%;
+  width: 22%;
+  margin: 10px 0;
   padding: 1%;
   border-radius: 5px;
   border: 1px solid yellow;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-sizing: border-box;
 }
 
 .item .img-item{
   width: 100%;
+  object-fit: cover;
   border-radius: 10%;
 }
 .item .text-item{
@@ -80,4 +82,17 @@
 
 .link-vacio:hover {
   background-color: yellow;
+}
+
+
+@media (max-width: 1200px) {
+  .itemlistcontainer .item {
+    width: 48%;
+  }
+}
+
+@media (max-width: 768px) {
+  .itemlistcontainer .item {
+    width: 100%;
+  }
 }
