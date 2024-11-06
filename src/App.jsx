@@ -8,6 +8,7 @@ import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailCont
 import Cart from "./components/Cart/Cart";
 import Checkout from "./components/Checkout/Checkout";
 import "react-toastify/dist/ReactToastify.css";
+import "./index.css";
 function App() {
   
   return (

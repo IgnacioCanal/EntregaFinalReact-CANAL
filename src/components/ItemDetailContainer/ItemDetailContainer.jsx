@@ -26,6 +26,9 @@ const ItemDetailContainer = () => {
         const nuevoStock = prevStock[product.id]
           ? prevStock[product.id] - cantidad
           : product.stock - cantidad;
+          if (nuevoStock < 0) {
+            return prevStock;
+          }
         return { ...prevStock, [product.id]: nuevoStock };
       });
 
@@ -70,12 +73,14 @@ const ItemDetailContainer = () => {
   };
 
   useEffect(() => {
-    getProduct();
+    if (idProducto) {
+      getProduct();
+    }
   }, [idProducto]);
   if (loading) {
     return <Loading />;
   }
-  if (product === null) {
+  if (!product) {
     return <div>
     <p className="productnull">Producto no encontrado</p>
     <button onClick={handleBackToHome} className="botonnull">Volver al inicio</button>
